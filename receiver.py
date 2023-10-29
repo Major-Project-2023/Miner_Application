@@ -34,9 +34,9 @@ while(1):
 
         if len(full_msg) - HEADERSIZE == msglen:
             print(full_msg[HEADERSIZE:])
-            # cursor.execute("SELECT * FROM Blockchain ORDER BY number DESC LIMIT 1;")
-            # result = cursor.fetchall()
-            # print(result[0])
+            cursor.execute("SELECT * FROM Blockchain ORDER BY number DESC LIMIT 1;")
+            result = cursor.fetchall()
+            print(result[0])
             print("full msg recvd\n")
             new_msg = True
             full_msg = ""
