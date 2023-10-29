@@ -34,9 +34,12 @@ while(1):
 
         if len(full_msg) - HEADERSIZE == msglen:
             print(full_msg[HEADERSIZE:])
-            cursor.execute("SELECT * FROM Blockchain ORDER BY number DESC LIMIT 1;")
-            result = cursor.fetchall()
-            print(result[0])
+            # data_to_insert = ('4','000079a280ae6a52c9053e3dfc8fcaedceb9397f50ca6adda7be90a5b348cc7f','00002af91ce372d48bd05f794e833db5a41ff19f271f56b16bde4a4cce50cec7','bye','24066')
+            data_to_insert = ()
+            insert_query = "INSERT INTO Blockchain (sender_country, receiver_country, amount) VALUES (%s, %s, %s)"
+            # cursor.execute(insert_query, data_to_insert)
+            connection.commit()
             print("full msg recvd\n")
             new_msg = True
             full_msg = ""
+# [[<User: sarthak>, <User: NGO2>, 'donor1@donor.com', 'donor1@donor.com', 2]]
