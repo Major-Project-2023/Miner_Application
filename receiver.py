@@ -23,10 +23,11 @@ while(1):
     received_data = s.recv(1024)
     data = pickle.loads(received_data)
     try:
-        data_to_insert = [data[0][0], data[0][1], str(data[0][2])]
-        insert_query ="INSERT INTO Pool (sender_country, receiver_country, amount) VALUES (%s, %s, %s)"
-        cursor.execute(insert_query, data_to_insert)
+        for i in range(len(data)):
+            data_to_insert = [data[i][0], data[i][1], str(data[i][2])]
+            insert_query ="INSERT INTO Pool (sender_country, receiver_country, amount) VALUES (%s, %s, %s)"
+            cursor.execute(insert_query, data_to_insert)
+            print(f"Data i.e. {data_to_insert} was inserted")
         connection.commit()
-        print(f"Data i.e. {data_to_insert} was inserted")
     except Exception as e:
         pass
