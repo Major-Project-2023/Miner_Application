@@ -1,6 +1,6 @@
 # Connecting with MySQL
 # Importing the connection variables
-import mysql.connector, configparser
+import mysql.connector, configparser, time
 
 config = configparser.ConfigParser()
 config.read("config.ini")
@@ -80,6 +80,7 @@ class Block:
         data_to_insert = [str(self.block_number), str(self.block_hash), str(self.previous_hash), str(self.block_data), str(self.block_nonce)]
         insert_query ="INSERT INTO Blockchain (number, hash, previous, data, nonce) VALUES (%s, %s, %s, %s, %s)"
         cursor.execute(insert_query, data_to_insert)
+        cursor.execute('DELETE FROM Pool')
         connection.commit()
         # cursor.execute("INSERT INTO Blockchain VALUES('10','HASH', 'PREV', 'DATA', 'NONCE');")
         # cursor.execute("SELECT * FROM Blockchain ORDER BY number DESC LIMIT 1;")
@@ -89,9 +90,10 @@ class Block:
     def is_valid(self):
         pass
 
-cursor.execute("SELECT * FROM Pool;")
-result = cursor.fetchall()
-# data = result
-# print(data)
-block = Block(result)
-block.add_block()
+while(1):
+    time.sleep(60)
+    cursor.execute("SELECT * FROM Pool;")
+    result = cursor.fetchall()
+    block = Block(result)
+    block.add_block()
+    print("\nRESULT",result)
