@@ -63,8 +63,8 @@ class Block:
     
     def mine_block(self):
         while(1):
-            # print(self.block_nonce)
-            # print(self.block_hash)
+            print(self.block_nonce)
+            print(self.block_hash)
             if(self.block_hash[:self.difficulty] == '0'*self.difficulty):
                 break
             else:
@@ -96,4 +96,4 @@ while(1):
     result = cursor.fetchall()
     block = Block(result)
     block.add_block()
-    print("\nRESULT",result)
+    # print("\nRESULT",result)
